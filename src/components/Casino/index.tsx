@@ -18,12 +18,36 @@ const Casino: React.FC = () => {
       description: string;
       icon: string;
       name: string;
+      categoryIds: number[];
     }[]
   >([]);
   const [error, setError] = useState([] as any);
 
   const [searchValue, setSearchValue] = useState("");
   const [filteredGames, setFilteredGames] = useState(games);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  // Handle category click
+
+  const handleCategoryClick = (categoryId: number) => {
+    setSelectedCategory(categoryId);
+  };
+
+  // Filter the games array based on the search value and selected category
+  useEffect(() => {
+    let filtered = games;
+
+    if (searchValue) {
+      filtered = filtered.filter((game) =>
+        game.name.toLowerCase().includes(searchValue.toLowerCase())
+      );
+    }
+
+    if (selectedCategory !== 0) {
+      filtered = filtered.filter((game) => game.categoryIds.includes(selectedCategory));
+    }
+
+    setFilteredGames(filtered);
+  }, [searchValue, games, selectedCategory]);
 
   // ... (other functions)
 
@@ -79,6 +103,8 @@ const Casino: React.FC = () => {
         })
       );
 
+      console.log(`updatedGamesData:`, updatedGamesData);
+      console.log(`categoriesData:`, categoriesData);
       setCategories(categoriesData);
       setGames(updatedGamesData);
 
@@ -95,10 +121,6 @@ const Casino: React.FC = () => {
       fetchData();
     }
   }, [authState]);
-
-  useEffect(() => {
-    console.log(`games:`, games);
-  }, [games]);
 
   const {
     name = undefined,
@@ -120,6 +142,14 @@ const Casino: React.FC = () => {
       type: "LOGOUT",
     });
     navigate("/logOutSucesfull");
+  };
+
+  const handlePlayButtonClick = (gameCode: string) => {
+    if (window.comeon && window.comeon.game) {
+      window.comeon.game.launch(gameCode);
+    } else {
+      console.error("Game library not found.");
+    }
   };
 
   return (
@@ -184,7 +214,9 @@ const Casino: React.FC = () => {
                         </div>
                         <div className="description">{game.description}</div>
                         <div className="extra">
-                          <div className="play ui right floated secondary button inverted">
+                          <div
+                            className="play ui right floated secondary button inverted"
+                            onClick={() => handlePlayButtonClick(game.code)}>
                             Play
                             <i className="right chevron icon"></i>
                           </div>
@@ -193,7 +225,19 @@ const Casino: React.FC = () => {
                     </div>
                   );
                 })}
-
+                <div className="ingame">
+                  <div className="ui grid centered">
+                    <div className="three wide column">
+                      <div className="ui right floated secondary button inverted">
+                        <i className="left chevron icon"></i>Back
+                      </div>
+                    </div>
+                    <div className="ten wide column">
+                      <div id="game-launch"></div>
+                    </div>
+                    <div className="three wide column"></div>
+                  </div>
+                </div>
                 {/* <!-- end game item template --> */}
               </div>
             </div>
@@ -206,7 +250,14 @@ const Casino: React.FC = () => {
                   <div className="content">
                     <div className="header">
                       {categories.map((category) => {
-                        return <p key={category.id}>{category.name}</p>;
+                        return (
+                          <p
+                            className="item name button"
+                            key={category.id}
+                            onClick={() => handleCategoryClick(category.id)}>
+                            {category.name}
+                          </p>
+                        );
                       })}
                     </div>
                   </div>
