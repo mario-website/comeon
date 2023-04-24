@@ -120,7 +120,7 @@ const Casino: React.FC = () => {
     if (authState.isAuthenticated) {
       fetchData();
     }
-  }, [authState]);
+  }, [authState.isAuthenticated]);
 
   const {
     name = undefined,
@@ -145,6 +145,7 @@ const Casino: React.FC = () => {
   };
 
   const handlePlayButtonClick = (gameCode: string) => {
+    console.log(`gameCode:`, gameCode);
     if (window.comeon && window.comeon.game) {
       window.comeon.game.launch(gameCode);
     } else {
@@ -252,7 +253,7 @@ const Casino: React.FC = () => {
                       {categories.map((category) => {
                         return (
                           <p
-                            className="item name button"
+                            className="button"
                             key={category.id}
                             onClick={() => handleCategoryClick(category.id)}>
                             {category.name}
