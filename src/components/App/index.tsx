@@ -3,7 +3,6 @@ import LogoSvg from "../../assets/images/logo.svg";
 import Login from "../Login";
 import Casino from "../Casino";
 import Ingame from "../Ingame";
-import "./style.scss";
 
 function App() {
   return (
