@@ -1,6 +1,6 @@
 import React from "react";
-import TopLogo from "../TopLogo";
-import Main from "../Main";
+import TopLogo from "./components/TopLogo";
+import Main from "./components/Main";
 
 function App() {
   return (

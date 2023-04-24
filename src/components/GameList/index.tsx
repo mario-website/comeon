@@ -2,7 +2,7 @@ import React from "react";
 
 // import "./style.scss";
 
-const Ingame = () => {
+const GameList = () => {
   return (
     <div className="ingame" style={{display: "none"}}>
       <div className="ui grid centered">
@@ -20,4 +20,4 @@ const Ingame = () => {
   );
 };
 
-export default Ingame;
+export default GameList;

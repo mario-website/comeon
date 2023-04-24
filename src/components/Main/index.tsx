@@ -1,15 +1,14 @@
 import React from "react";
-import Login from "../Login";
+import {useAuthState} from "../../contexts/AuthContext";
+import LoginForm from "../LoginForm";
 import Casino from "../Casino";
-import Ingame from "../Ingame";
 // import "./style.scss";
 
-const Main = () => {
+const Main: React.FC = () => {
+  const authState = useAuthState();
   return (
     <div className="main container">
-      <Login />
-      <Casino />
-      <Ingame />
+      {authState.isAuthenticated ? <Casino /> : <LoginForm />}
     </div>
   );
 };
