@@ -91,7 +91,11 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             </div>
           </div>
         </form>
-        {error && <div className="ui error message">{error}</div>}
+        {error && (
+          <div className="field ui error message input" style={{fontSize: "1rem"}}>
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );
