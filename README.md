@@ -34,31 +34,17 @@ A simple casino game platform built using React, TypeScript, and other technolog
 
 ### Installation
 
-1. Clone the repository
+Clone the repository, navigate to the project directory, install the dependencies, and run the application in development mode with the following commands:
 
 ```bash
 git clone https://github.com/mario-website/comeon.git
-```
-
-2. Navigate to the project directory
-
-```bash
 cd comeon
-```
-
-3. Install the dependencies
-
-```bash
 npm install
-```
-
-4. Run the application in development mode
-
-```bash
 npm start
 ```
 
-5. It should automatically open your browser and navigate to http://localhost:3000
+The application should automatically open your browser and navigate to
+http://localhost:3000
 
 ## Project Structure
 
