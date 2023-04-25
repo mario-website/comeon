@@ -1,19 +1,14 @@
-import React, {useState, FormEvent} from "react";
+import React, {useState, FormEvent, FC} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAuthDispatch} from "../../contexts/AuthContext";
 // import "./LoginForm.module.css";
 
-interface LoginFormProps {
-  // Add any additional props needed for the LoginForm component
-}
-
-const LoginForm: React.FC<LoginFormProps> = (props) => {
+const LoginForm: FC = () => {
+  const navigate = useNavigate();
+  const authDispatch = useAuthDispatch();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
-
-  const authDispatch = useAuthDispatch();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -34,6 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         }),
       });
 
+      // If the games API response is not ok, add the error to the error state and exit the function
       if (!response.ok) {
         const errorData = await response.json();
         setError(errorData.error);
@@ -48,14 +44,15 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           player: userData.player,
         },
       });
-      navigate("/loginSucesfull");
+
+      navigate("/casino");
     } catch (err) {
       setError("Error occurred during login. Please try again.");
     }
   };
 
   return (
-    <div className="login" style={{display: "block"}}>
+    <div className="login">
       <div className="ui grid centered">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="fields">
