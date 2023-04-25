@@ -47,32 +47,7 @@ The application should automatically open your browser and navigate to
 http://localhost:3000
 
 ## Project Structure
-
-src
-├── assets
-│ ├── images
-│ └── styles
-├── components
-│ ├── Games
-│ ├── GameList
-│ ├── UserDashboard
-│ └── ...
-├── hooks
-│ ├── useAuth
-│ └── ...
-├── mock
-│ ├── mock-api.js
-│ └── mock-data.json
-├── stylesheets
-│ │ ├── components
-│ │ ├── themes
-│ ├── semantic.css
-│ └── styles.css
-├── types
-│ ├── global.d.ts
-│ └── ...
-└── index.tsx
-
+```bash
 src
 ├── assets
 │   └── images
@@ -93,3 +68,4 @@ src
 │   └── global.d.ts
 ├── App.tsx
 └── index.tsx
+```
